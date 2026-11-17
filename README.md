@@ -2,7 +2,7 @@
 
 A web application that tells you which cocktails you can make with what you have at home.
 
-You tick the ingredients of your bar; the application lists the cocktails you can make right now, and the ones a single purchase would unlock. Each recipe has its photo, its ingredients with what you own or miss, and a step-by-step mode for the kitchen counter. The interface is available in English and French.
+You tick the ingredients of your bar; the application lists the cocktails you can make right now, and the ones a single purchase would unlock. What you are missing goes to a shopping list in one tap, and comes back into your bar once bought. Each recipe has its photo, its ingredients with what you own or miss, and a step-by-step mode for the kitchen counter. The interface is available in English and French.
 
 ## Requirements
 
@@ -71,6 +71,7 @@ The application is organised by business domain. Each module in `apps/web/src/mo
 | `pantry`      | The user's bar                                                                   |
 | `matching`    | The catalog compared with the bar: what can be made, what is one ingredient away |
 | `preparation` | Step-by-step mode                                                                |
+| `shopping`    | Shopping list: missing ingredients and anything else to buy                      |
 
 ## How matching works
 

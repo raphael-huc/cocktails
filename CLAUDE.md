@@ -59,6 +59,7 @@ The modules and what depends on what (never the other way round):
 - `pantry` — the user's bar. Depends on `catalog`.
 - `matching` — the catalog compared with the bar. Depends on `catalog` and `pantry`, and therefore owns every screen that needs both: what can be made, the catalog with its "ready" marks, a cocktail's page.
 - `preparation` — the step-by-step mode. Depends on `catalog`.
+- `shopping` — the shopping list. Depends on `catalog` and `pantry` ("bought" moves an ingredient to the bar). `matching` uses its `ShoppingToggle` wherever an ingredient is missing. The Directus collection behind it, `shopping_item`, is shared by every application of the workspace: an item is a free label, a link to an ingredient, or both, so this module must keep displaying items it did not create.
 
 Lists of cocktails are filtered through the URL (`app/cocktail-filter-search.ts`) and unfolded a page at a time (`shared/ui/use-show-more.ts`); do not render the whole catalog at once.
 
