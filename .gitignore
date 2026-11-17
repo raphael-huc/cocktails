@@ -1,15 +1,46 @@
+# Dependencies
 node_modules/
+.pnpm-store/
+
+# Build output
 dist/
 storybook-static/
-*.local
-.DS_Store
+*.tsbuildinfo
 
-# Generated code
+# Generated code: rebuilt by `pnpm dev`, `pnpm build` and `pnpm typecheck`
 apps/web/src/app/routeTree.gen.ts
 apps/web/src/shared/i18n/paraglide/
+apps/web/project.inlang/cache/
 
 # Import tool: downloaded sources and reports
 tools/import/.cache/
 
-# Paraglide plugin cache
-apps/web/project.inlang/cache/
+# Local environment overrides. `.env` itself only holds non-secret defaults and
+# is committed; anything secret or personal goes in a `.local` file.
+*.local
+.env.*.local
+
+# Test and tooling output
+coverage/
+.vitest/
+test-results/
+playwright-report/
+.playwright-mcp/
+.cache/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Editors and operating systems
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Claude Code: personal settings stay local, shared ones are committed
+.claude/settings.local.json
