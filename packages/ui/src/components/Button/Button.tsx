@@ -16,6 +16,7 @@ export const buttonStyles = tv({
       ghost: "border-transparent bg-transparent text-ink-muted hover:text-ink",
     },
     size: {
+      sm: "h-8 px-3 text-sm",
       md: "h-10 px-4 text-sm",
       lg: "h-12 px-6 text-base",
     },
