@@ -60,9 +60,11 @@ export type PantryItemRow = {
   user_created: string;
 };
 
-/** Shared by every application of the project: a free label, a link to an ingredient, or both. */
+/** Shared by the applications of the workspace, each keeping its own list in it (`app`). */
 export type ShoppingItemRow = {
   id: string;
+  /** The application the item was added from. */
+  app: string;
   label: string | null;
   ingredient: string | IngredientRow | null;
   user_created: string;
