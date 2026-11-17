@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { CocktailDetail } from "@/modules/catalog";
+import { ShoppingToggle } from "@/modules/shopping";
 import { m } from "@/shared/i18n";
 import { useCocktailMatches } from "../application/use-cocktail-matches";
 
@@ -18,6 +19,9 @@ export function CocktailScreen({ cocktailId }: { cocktailId: string }) {
           cocktail={cocktail}
           ingredientNames={ingredientNames}
           availableIngredientIds={availableIngredientIds}
+          missingAction={(ingredientId, name) => (
+            <ShoppingToggle ingredientId={ingredientId} name={name} />
+          )}
         />
       ) : (
         <p className="text-ink-muted">{m.cocktail_not_found()}</p>

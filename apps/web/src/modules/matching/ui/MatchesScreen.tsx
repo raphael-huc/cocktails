@@ -4,6 +4,7 @@ import {
   categoriesOf,
   matchesFilter,
 } from "@/modules/catalog";
+import { ShoppingToggle } from "@/modules/shopping";
 import { m } from "@/shared/i18n";
 import { useCocktailMatches } from "../application/use-cocktail-matches";
 import { groupByMissingIngredient } from "../domain/matching";
@@ -40,6 +41,9 @@ export function MatchesScreen({ filter, onFilterChange }: MatchesScreenProps) {
           makeable={makeable}
           almostGroups={almostGroups}
           ingredientNames={ingredientNames}
+          groupAction={(ingredientId, name) => (
+            <ShoppingToggle ingredientId={ingredientId} name={name} />
+          )}
         />
       )}
     </div>

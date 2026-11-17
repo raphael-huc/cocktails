@@ -1,4 +1,5 @@
 import { Badge } from "@cocktails/ui";
+import type { ReactNode } from "react";
 import { m } from "@/shared/i18n";
 import type { CocktailIngredient } from "../domain/cocktail";
 
@@ -10,6 +11,11 @@ export type IngredientListProps = {
    * ones those cover. When given, each line says whether it is available.
    */
   availableIngredientIds?: ReadonlySet<string>;
+  /**
+   * What to offer next to a required ingredient the user is missing, such as
+   * adding it to a shopping list. Receives the ingredient and its name.
+   */
+  missingAction?: (ingredientId: string, name: string) => ReactNode;
   /** Larger text, for reading at arm's length while preparing. */
   size?: "md" | "lg";
 };
@@ -28,6 +34,7 @@ export function IngredientList({
   lines,
   ingredientNames,
   availableIngredientIds,
+  missingAction,
   size = "md",
 }: IngredientListProps) {
   return (
@@ -55,6 +62,12 @@ export function IngredientList({
             {line.garnish ? <Badge>{m.cocktail_garnish()}</Badge> : null}
             {line.optional ? <Badge>{m.cocktail_optional()}</Badge> : null}
             {missing ? <Badge tone="danger">{m.cocktail_missing()}</Badge> : null}
+            {missing && missingAction
+              ? missingAction(
+                  line.ingredientId,
+                  ingredientNames.get(line.ingredientId) ?? line.ingredientId,
+                )
+              : null}
             {available ? (
               <span className="text-accent" role="img" aria-label={m.cocktail_in_bar()}>
                 ✓

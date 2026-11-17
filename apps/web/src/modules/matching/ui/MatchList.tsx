@@ -1,4 +1,5 @@
 import { Button } from "@cocktails/ui";
+import type { ReactNode } from "react";
 import { CocktailGrid, cocktailCountLabel } from "@/modules/catalog";
 import { m } from "@/shared/i18n";
 import { useShowMore } from "@/shared/ui/use-show-more";
@@ -11,12 +12,23 @@ export type MatchListProps = {
   /** Cocktails one ingredient away, grouped by that ingredient. */
   almostGroups: readonly MissingIngredientGroup[];
   ingredientNames: ReadonlyMap<string, string>;
+  /**
+   * What to offer on each missing ingredient, such as adding it to a shopping
+   * list. Receives the ingredient and its name.
+   */
+  groupAction?: (ingredientId: string, name: string) => ReactNode;
 };
 
 /** Missing ingredients listed at first: the most useful purchases. */
 const GROUPS_PER_PAGE = 10;
 
-export function MatchList({ listKey, makeable, almostGroups, ingredientNames }: MatchListProps) {
+export function MatchList({
+  listKey,
+  makeable,
+  almostGroups,
+  ingredientNames,
+  groupAction,
+}: MatchListProps) {
   const groups = useShowMore(`${listKey}/groups`, almostGroups.length, GROUPS_PER_PAGE);
 
   if (makeable.length === 0 && almostGroups.length === 0) {
@@ -44,43 +56,51 @@ export function MatchList({ listKey, makeable, almostGroups, ingredientNames }: 
             <p className="text-ink-muted">{m.matches_almost_intro()}</p>
           </header>
           <div className="flex flex-col border-t border-line">
-            {almostGroups.slice(0, groups.visible).map((group, index) => (
-              // The first group is the best purchase: show what it unlocks at once.
-              <details
-                key={group.ingredientId}
-                open={index === 0}
-                className="group border-b border-line"
-              >
-                <summary
-                  className={[
-                    "flex cursor-pointer list-none items-baseline gap-3 py-4",
-                    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
-                    "[&::-webkit-details-marker]:hidden",
-                  ].join(" ")}
-                >
-                  <span
-                    aria-hidden="true"
-                    className="text-accent transition-transform group-open:rotate-90"
-                  >
-                    ›
-                  </span>
-                  <span className="flex-1 font-display text-xl">
-                    {ingredientNames.get(group.ingredientId) ?? group.ingredientId}
-                  </span>
-                  <span className="text-sm text-ink-muted tabular-nums">
-                    {cocktailCountLabel(group.matches.length)}
-                  </span>
-                </summary>
-                <div className="pb-6">
-                  <CocktailGrid
-                    key={`${listKey}/${group.ingredientId}`}
-                    listKey={`${listKey}/${group.ingredientId}`}
-                    items={group.matches}
-                    ingredientNames={ingredientNames}
-                  />
+            {almostGroups.slice(0, groups.visible).map((group, index) => {
+              const name = ingredientNames.get(group.ingredientId) ?? group.ingredientId;
+
+              return (
+                <div key={group.ingredientId} className="relative border-b border-line">
+                  {/* The first group is the best purchase: show what it unlocks at once. */}
+                  <details open={index === 0} className="group">
+                    <summary
+                      className={[
+                        "flex cursor-pointer list-none flex-wrap items-baseline gap-x-3 py-4",
+                        "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+                        "[&::-webkit-details-marker]:hidden",
+                        // Room for the action, which sits over the right end of the row.
+                        groupAction ? "pr-40" : "",
+                      ].join(" ")}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="text-accent transition-transform group-open:rotate-90"
+                      >
+                        ›
+                      </span>
+                      <span className="font-display text-xl">{name}</span>
+                      <span className="text-sm text-ink-muted tabular-nums">
+                        {cocktailCountLabel(group.matches.length)}
+                      </span>
+                    </summary>
+                    <div className="pb-6">
+                      <CocktailGrid
+                        key={`${listKey}/${group.ingredientId}`}
+                        listKey={`${listKey}/${group.ingredientId}`}
+                        items={group.matches}
+                        ingredientNames={ingredientNames}
+                      />
+                    </div>
+                  </details>
+                  {/* Outside the summary: a button inside it would also fold the group. */}
+                  {groupAction ? (
+                    <div className="absolute top-3 right-0">
+                      {groupAction(group.ingredientId, name)}
+                    </div>
+                  ) : null}
                 </div>
-              </details>
-            ))}
+              );
+            })}
           </div>
           {groups.remaining > 0 ? (
             <Button variant="secondary" className="self-center" onClick={groups.showMore}>

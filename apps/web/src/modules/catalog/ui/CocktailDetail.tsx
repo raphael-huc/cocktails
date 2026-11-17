@@ -1,5 +1,6 @@
 import { Badge, buttonStyles } from "@cocktails/ui";
 import { Link } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import { m } from "@/shared/i18n";
 import type { Cocktail } from "../domain/cocktail";
 import { IngredientList } from "./IngredientList";
@@ -13,12 +14,15 @@ export type CocktailDetailProps = {
    * given, the recipe shows what is available and what is missing.
    */
   availableIngredientIds?: ReadonlySet<string>;
+  /** What to offer next to a missing ingredient, see `IngredientList`. */
+  missingAction?: (ingredientId: string, name: string) => ReactNode;
 };
 
 export function CocktailDetail({
   cocktail,
   ingredientNames,
   availableIngredientIds,
+  missingAction,
 }: CocktailDetailProps) {
   return (
     <article className="flex flex-col gap-10">
@@ -63,6 +67,7 @@ export function CocktailDetail({
           lines={cocktail.ingredients}
           ingredientNames={ingredientNames}
           availableIngredientIds={availableIngredientIds}
+          missingAction={missingAction}
         />
       </section>
 
