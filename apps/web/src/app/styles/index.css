@@ -1,0 +1,37 @@
+@import "tailwindcss";
+@import "@cocktails/ui/tokens.css";
+@import "@fontsource-variable/fraunces";
+
+/* The UI library ships as source: Tailwind has to scan it for class names. */
+@source "../../../../../packages/ui/src";
+
+/*
+ * "Bar menu" theme: the application's values for the tokens declared by
+ * @cocktails/ui. Dark and warm, with a brass accent; colour otherwise comes
+ * from the drinks themselves.
+ */
+@theme {
+  --color-canvas: #14110f;
+  --color-surface: #1e1a17;
+  --color-line: #3a332d;
+  --color-ink: #f3ead9;
+  --color-ink-muted: #a89d8c;
+  --color-accent: #c9a14a;
+  --color-accent-ink: #14110f;
+  --color-danger: #e5735f;
+
+  --font-display: "Fraunces Variable", ui-serif, Georgia, serif;
+
+  --radius-control: 0.125rem;
+  --radius-card: 0.25rem;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-canvas font-body text-ink antialiased;
+  }
+}
