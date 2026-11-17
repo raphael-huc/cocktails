@@ -59,7 +59,7 @@ The modules and what depends on what (never the other way round):
 - `pantry` — the user's bar. Depends on `catalog`.
 - `matching` — the catalog compared with the bar. Depends on `catalog` and `pantry`, and therefore owns every screen that needs both: what can be made, the catalog with its "ready" marks, a cocktail's page.
 - `preparation` — the step-by-step mode. Depends on `catalog`.
-- `shopping` — the shopping list. Depends on `catalog` and `pantry` ("bought" moves an ingredient to the bar). `matching` uses its `ShoppingToggle` wherever an ingredient is missing. The Directus collection behind it, `shopping_item`, is shared by every application of the workspace: an item is a free label, a link to an ingredient, or both, so this module must keep displaying items it did not create.
+- `shopping` — the shopping list. Depends on `catalog` and `pantry` ("bought" moves an ingredient to the bar). `matching` uses its `ShoppingToggle` wherever an ingredient is missing. The Directus collection behind it, `shopping_item`, serves every application of the workspace, each keeping its own list in it: an item is a free label, a link to an ingredient, or both, and carries the `app` it was added from. This module only reads and writes the items whose `app` is `cocktails`.
 
 Lists of cocktails are filtered through the URL (`app/cocktail-filter-search.ts`) and unfolded a page at a time (`shared/ui/use-show-more.ts`); do not render the whole catalog at once.
 
@@ -74,6 +74,7 @@ Lists of cocktails are filtered through the URL (`app/cocktail-filter-search.ts`
 - Every props-only component of a module's `ui/` has a `.stories.tsx` next to it too, shown by the Storybook of `apps/web` (`apps/web/.storybook`). Stories follow the same import rules as `ui/`; the router, the query cache and the mock of the auth repository are set up once in `.storybook/preview.tsx`. Screens have no stories.
 - `apps/web/src/shared/http/schema.ts` is a hand-written mirror of the data model created by `../huc-back/scripts/setup-cocktails.py`. Change both together.
 - Cocktail images are requested in the sizes declared as presets in `../huc-back/scripts/setup-cocktails.py` (`shared/http/assets.ts`), never with free dimensions: the import tool generates those files ahead of time (`pnpm import-recipes warm-photos`).
+- **Personal data is filtered by owner in the request itself** (`user_created = $CURRENT_USER`), in `pantry` and `shopping`, on top of the Directus permissions. Permissions do not restrict an administrator, who would otherwise read and delete everybody's rows from the application.
 - Generated code is not committed: `src/app/routeTree.gen.ts` and `src/shared/i18n/paraglide/`. `pnpm typecheck`, `pnpm dev` and `pnpm build` regenerate them.
 - TypeScript stays on 6.x: dependency-cruiser cannot read sources with TypeScript 7.0.
 
