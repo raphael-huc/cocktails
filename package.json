@@ -1,0 +1,23 @@
+{
+  "name": "cocktails",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.13.1",
+  "scripts": {
+    "dev": "pnpm --filter @cocktails/web dev",
+    "build": "pnpm --filter @cocktails/web build",
+    "storybook": "pnpm --filter @cocktails/ui storybook",
+    "storybook:web": "pnpm --filter @cocktails/web storybook",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "arch": "pnpm --filter @cocktails/web arch",
+    "check": "pnpm lint && pnpm typecheck && pnpm arch && pnpm test",
+    "import-recipes": "pnpm --filter @cocktails/import start"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.6.8",
+    "typescript": "^6.0.3"
+  }
+}

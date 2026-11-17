@@ -1,0 +1,15 @@
+node_modules/
+dist/
+storybook-static/
+*.local
+.DS_Store
+
+# Generated code
+apps/web/src/app/routeTree.gen.ts
+apps/web/src/shared/i18n/paraglide/
+
+# Import tool: downloaded sources and reports
+tools/import/.cache/
+
+# Paraglide plugin cache
+apps/web/project.inlang/cache/
