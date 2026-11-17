@@ -4,6 +4,7 @@
   "nav_matches": "What I can make",
   "nav_catalog": "All cocktails",
   "nav_pantry": "My bar",
+  "nav_shopping": "Shopping list",
   "loading": "Loading…",
   "error_title": "Something went wrong",
   "error_retry": "Try again",
@@ -80,5 +81,18 @@
   "prep_next": "Next",
   "prep_previous": "Previous",
   "prep_done": "Done",
-  "prep_exit": "Back to the recipe"
+  "prep_exit": "Back to the recipe",
+  "shopping_title": "Shopping list",
+  "shopping_intro": "What you plan to buy: the ingredients you are missing, and anything else you add. Mark an ingredient as bought to move it to your bar.",
+  "shopping_empty": "Your shopping list is empty. Add the ingredients you are missing from a cocktail's page or from the suggestions of what you can almost make, or type anything above.",
+  "shopping_add": "Add to list",
+  "shopping_listed": "On your list",
+  "shopping_add_named": "Add {name} to the shopping list",
+  "shopping_remove_named": "Remove {name} from the shopping list",
+  "shopping_bought": "Bought",
+  "shopping_bought_named": "Mark {name} as bought and add it to your bar",
+  "shopping_remove": "Remove",
+  "shopping_in_bar": "Already in your bar",
+  "shopping_add_item_label": "Add something else",
+  "shopping_add_item_submit": "Add"
 }

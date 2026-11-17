@@ -4,6 +4,7 @@
   "nav_matches": "Ce que je peux faire",
   "nav_catalog": "Tous les cocktails",
   "nav_pantry": "Mon bar",
+  "nav_shopping": "Liste de courses",
   "loading": "Chargement…",
   "error_title": "Une erreur est survenue",
   "error_retry": "Réessayer",
@@ -80,5 +81,18 @@
   "prep_next": "Suivant",
   "prep_previous": "Précédent",
   "prep_done": "Terminé",
-  "prep_exit": "Retour à la recette"
+  "prep_exit": "Retour à la recette",
+  "shopping_title": "Liste de courses",
+  "shopping_intro": "Ce que vous prévoyez d'acheter : les ingrédients qui vous manquent, et tout ce que vous ajoutez. Marquez un ingrédient comme acheté pour le faire passer dans votre bar.",
+  "shopping_empty": "Votre liste de courses est vide. Ajoutez les ingrédients qui vous manquent depuis la fiche d'un cocktail ou depuis les suggestions de ce que vous pouvez presque préparer, ou saisissez ce que vous voulez ci-dessus.",
+  "shopping_add": "Ajouter à la liste",
+  "shopping_listed": "Dans la liste",
+  "shopping_add_named": "Ajouter {name} à la liste de courses",
+  "shopping_remove_named": "Retirer {name} de la liste de courses",
+  "shopping_bought": "Acheté",
+  "shopping_bought_named": "Marquer {name} comme acheté et l'ajouter à votre bar",
+  "shopping_remove": "Retirer",
+  "shopping_in_bar": "Déjà dans votre bar",
+  "shopping_add_item_label": "Ajouter autre chose",
+  "shopping_add_item_submit": "Ajouter"
 }

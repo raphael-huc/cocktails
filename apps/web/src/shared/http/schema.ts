@@ -60,6 +60,14 @@ export type PantryItemRow = {
   user_created: string;
 };
 
+/** Shared by every application of the project: a free label, a link to an ingredient, or both. */
+export type ShoppingItemRow = {
+  id: string;
+  label: string | null;
+  ingredient: string | IngredientRow | null;
+  user_created: string;
+};
+
 export type Schema = {
   ingredient: IngredientRow[];
   ingredient_translations: IngredientTranslationRow[];
@@ -67,4 +75,5 @@ export type Schema = {
   cocktail_translations: CocktailTranslationRow[];
   cocktail_ingredient: CocktailIngredientRow[];
   pantry_item: PantryItemRow[];
+  shopping_item: ShoppingItemRow[];
 };

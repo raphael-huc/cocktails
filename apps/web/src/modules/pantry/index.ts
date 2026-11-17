@@ -1,3 +1,4 @@
+export { useSetPantryIngredient } from "./application/pantry.mutations";
 export { pantryQueryOptions } from "./application/pantry.queries";
 export type { Pantry } from "./domain/pantry";
 export { PantryScreen } from "./ui/PantryScreen";

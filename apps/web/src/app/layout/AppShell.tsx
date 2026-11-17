@@ -1,5 +1,6 @@
 import { Link, Outlet, useRouter } from "@tanstack/react-router";
 import { LanguageSwitcher, LogoutButton } from "@/modules/auth";
+import { useShoppingListCount } from "@/modules/shopping";
 import { m } from "@/shared/i18n";
 
 const navLinkClass = "whitespace-nowrap py-2 text-ink-muted transition-colors hover:text-ink";
@@ -9,6 +10,7 @@ const activeNavLink = {
 
 export function AppShell() {
   const router = useRouter();
+  const shoppingCount = useShoppingListCount();
 
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col px-5">
@@ -35,6 +37,12 @@ export function AppShell() {
           </Link>
           <Link to="/pantry" className={navLinkClass} activeProps={activeNavLink}>
             {m.nav_pantry()}
+          </Link>
+          <Link to="/shopping" className={navLinkClass} activeProps={activeNavLink}>
+            {m.nav_shopping()}
+            {shoppingCount ? (
+              <span className="ml-1.5 text-accent tabular-nums">{shoppingCount}</span>
+            ) : null}
           </Link>
         </nav>
         <div className="ml-auto flex items-center gap-2">
